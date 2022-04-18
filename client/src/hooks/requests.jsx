@@ -9,13 +9,33 @@ async function httpGetUsers() {
 }
 
 async function httpSubmitUser(user) {
-  return await fetch(`${API_URL}/users`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(user),
-  });
+  try {
+    return await fetch(`${API_URL}/users`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(user),
+    });
+  } catch (error) {
+    return {
+      ok: false,
+    };
+  }
 }
 
-export { httpGetUsers, httpSubmitUser };
+// PATCH REQUEST SUNOD
+
+async function httpDeleteUser(id) {
+  try {
+    return await fetch(`${API_URL}/users/${id}`, {
+      method: "DELETE",
+    });
+  } catch (error) {
+    return {
+      ok: false,
+    };
+  }
+}
+
+export { httpGetUsers, httpSubmitUser, httpDeleteUser };

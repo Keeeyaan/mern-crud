@@ -1,6 +1,7 @@
 import React from "react";
 
-const UsersTable = ({ users }) => {
+const UsersTable = ({ users, deleteUser }) => {
+
   return (
     <table
       cellPadding={10}
@@ -23,7 +24,10 @@ const UsersTable = ({ users }) => {
             <td>{user.age}</td>
             <td>{user.email}</td>
             <td>
-              <button className=" text-white border-2 border-[rgba(119,0,255,0.85)] py-[0.20rem] rounded px-[1rem] transition-all duration-[0.3s] ease-in-out hover:bg-[rgb(161,93,240)]">
+              <button
+                onClick={() => deleteUser(user.id)}
+                className=" text-white border-2 border-[rgba(119,0,255,0.85)] py-[0.20rem] rounded px-[1rem] transition-all duration-[0.3s] ease-in-out hover:bg-[rgb(161,93,240)]"
+              >
                 Delete
               </button>
             </td>
