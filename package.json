@@ -1,0 +1,17 @@
+{
+  "name": "mern-crud",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "server": "npm run server --prefix server",
+    "client": "npm run dev --prefix client",
+    "start": "concurrently 'npm:server' 'npm:client'"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "concurrently": "^7.1.0"
+  }
+}
