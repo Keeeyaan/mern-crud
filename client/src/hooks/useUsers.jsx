@@ -1,6 +1,11 @@
 import { useCallback, useEffect, useState } from "react";
 
-import { httpDeleteUser, httpGetUsers, httpSubmitUser } from "./requests";
+import {
+  httpDeleteUser,
+  httpGetUsers,
+  httpSubmitUser,
+  httpUpdateUser,
+} from "./requests";
 
 function useUsers() {
   const [users, saveUsers] = useState([]);
@@ -19,7 +24,21 @@ function useUsers() {
       const response = await httpSubmitUser(user);
 
       const success = response.ok;
-      if (success) return getUsers();
+      if (success) {
+        return getUsers();
+      }
+    },
+    [getUsers]
+  );
+
+  const updateUser = useCallback(
+    async (id, user) => {
+      const response = await httpUpdateUser(id, user);
+
+      const success = response.ok;
+      if (success) {
+        return getUsers();
+      }
     },
     [getUsers]
   );
@@ -40,6 +59,7 @@ function useUsers() {
     users,
     submitUser,
     deleteUser,
+    updateUser,
   };
 }
 export default useUsers;

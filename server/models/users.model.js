@@ -33,9 +33,18 @@ function deleteUserById(userId) {
   // return userDeleted;
 }
 
+function updateUserById(userId, user) {
+  const updatedUser = users.get(userId);
+  updatedUser.name = user.name;
+  updatedUser.age = user.age;
+  updatedUser.email = user.email;
+  return updatedUser;
+}
+
 module.exports = {
   getAllUsers,
   addNewUser,
   existsUserWithId,
   deleteUserById,
+  updateUserById,
 };

@@ -1,17 +1,32 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import UsersTable from "./UsersTable";
 import { useDispatch } from "react-redux";
 import { addUserToggleAction } from "../../store/addUserToggle";
+import { updateUserToggleAction } from "../../store/updateUserToggle";
+import UpdateUser from "./UpdateUser";
+import AddUser from "./AddUser";
 import useUsers from "../../hooks/useUsers";
 
 const Users = () => {
-  const { users, deleteUser } = useUsers();
+  const [userTable, setUserTable] = useState({});
+  const [userIdTable, setUserIdTable] = useState();
+  const { users, deleteUser, updateUser } = useUsers();
   const dispatch = useDispatch();
 
-  const { toggle } = addUserToggleAction;
+  const { toggle: toggleAdd } = addUserToggleAction;
+  const { toggle: toggleUpdate } = updateUserToggleAction;
 
   const addUserHandler = () => {
-    dispatch(toggle());
+    dispatch(toggleAdd());
+  };
+
+  const updateUserToggleHandler = () => {
+    dispatch(toggleUpdate());
+  };
+
+  const userTableDataHandler = (id, user) => {
+    setUserIdTable(id);
+    setUserTable(user);
   };
 
   useEffect(() => {
@@ -20,6 +35,8 @@ const Users = () => {
 
   return (
     <React.Fragment>
+      <AddUser />
+      <UpdateUser id={userIdTable} user={userTable} />
       <div className="h-[100vh] w-full flex justify-center items-center">
         <div className="p-[1rem] rounded bg-[rgba(0,0,0,0.20)] border-2 border-[rgba(119,0,255,0.85)] shadow-[0_0_20px_1px_rgba(255,255,255,0.1)] mt-[5rem] m-auto min-h-[50rem] w-[70%]">
           <button
@@ -28,7 +45,13 @@ const Users = () => {
           >
             Add User
           </button>
-          <UsersTable users={users} deleteUser={deleteUser} />
+          <UsersTable
+            users={users}
+            deleteUser={deleteUser}
+            updateUser={updateUser}
+            toggleUpdate={updateUserToggleHandler}
+            userTableData={userTableDataHandler}
+          />
         </div>
       </div>
     </React.Fragment>

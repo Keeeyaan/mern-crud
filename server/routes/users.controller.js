@@ -3,6 +3,7 @@ const {
   addNewUser,
   deleteUserById,
   existsUserWithId,
+  updateUserById,
 } = require("../models/users.model");
 
 function httpGetAllUsers(req, res) {
@@ -23,7 +24,6 @@ function httpAddNewUser(req, res) {
 }
 
 function httpDeleteUser(req, res) {
-  console.log(+req.params.id)
   const userId = +req.params.id;
   if (!existsUserWithId(userId)) {
     return res.status(404).json({
@@ -34,8 +34,23 @@ function httpDeleteUser(req, res) {
   return res.status(200).json(deleted);
 }
 
+function httpUpdateUser(req, res) {
+  const userId = +req.params.id;
+  const user = req.body;
+
+  if (!existsUserWithId(userId)) {
+    return res.status(404).json({
+      error: "User not found!",
+    });
+  }
+
+  const updated = updateUserById(userId, user);
+  return res.status(200).json(updated);
+}
+
 module.exports = {
   httpGetAllUsers,
   httpAddNewUser,
   httpDeleteUser,
+  httpUpdateUser,
 };

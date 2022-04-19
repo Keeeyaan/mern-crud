@@ -1,6 +1,16 @@
 import React from "react";
 
-const UsersTable = ({ users, deleteUser }) => {
+const UsersTable = ({
+  users,
+  deleteUser,
+  updateUser,
+  toggleUpdate,
+  userTableData,
+}) => {
+  const clickUpdateHander = (id, user) => {
+    toggleUpdate();
+    userTableData(id, { name: user.name, age: user.age, email: user.email });
+  };
 
   return (
     <table
@@ -24,6 +34,18 @@ const UsersTable = ({ users, deleteUser }) => {
             <td>{user.age}</td>
             <td>{user.email}</td>
             <td>
+              <button
+                onClick={() =>
+                  clickUpdateHander(user.id, {
+                    name: user.name,
+                    age: user.age,
+                    email: user.email,
+                  })
+                }
+                className=" mr-[0.5rem] text-white border-2 border-[rgba(119,0,255,0.85)] py-[0.20rem] rounded px-[1rem] transition-all duration-[0.3s] ease-in-out hover:bg-[rgb(161,93,240)]"
+              >
+                Update
+              </button>
               <button
                 onClick={() => deleteUser(user.id)}
                 className=" text-white border-2 border-[rgba(119,0,255,0.85)] py-[0.20rem] rounded px-[1rem] transition-all duration-[0.3s] ease-in-out hover:bg-[rgb(161,93,240)]"

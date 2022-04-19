@@ -1,7 +1,7 @@
 {
   "name": "mern-crud",
   "version": "1.0.0",
-  "description": "",
+  "description": "Basic MERN CRUD Application",
   "main": "index.js",
   "scripts": {
     "server": "npm run server --prefix server",
@@ -9,7 +9,7 @@
     "start": "concurrently 'npm:server' 'npm:client'"
   },
   "keywords": [],
-  "author": "",
+  "author": "Kean Jieden Villaflor",
   "license": "ISC",
   "dependencies": {
     "concurrently": "^7.1.0"

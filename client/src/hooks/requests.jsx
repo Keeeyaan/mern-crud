@@ -24,7 +24,21 @@ async function httpSubmitUser(user) {
   }
 }
 
-// PATCH REQUEST SUNOD
+async function httpUpdateUser(id, user) {
+  try {
+    return await fetch(`${API_URL}/users/${id}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(user),
+    });
+  } catch (error) {
+    return {
+      ok: false,
+    };
+  }
+}
 
 async function httpDeleteUser(id) {
   try {
@@ -38,4 +52,4 @@ async function httpDeleteUser(id) {
   }
 }
 
-export { httpGetUsers, httpSubmitUser, httpDeleteUser };
+export { httpGetUsers, httpSubmitUser, httpDeleteUser, httpUpdateUser };
